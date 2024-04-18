@@ -196,10 +196,17 @@ void figureall(double height, double angle)
 	glTranslated(0, 0, height);
 	figure(1, height, angle);
 }
+double h = 10, angle = 90, t_max = 0, h_max = 0, step = 40;
 void Render(double delta_time)
-{
-	double h = 5;
-	double angle = 90;
-	figureall(h, angle);
+{		
+	t_max += delta_time * step;
+	if (t_max > angle) step = -step;
+	if (t_max < -angle) step = -step;
+
+	h_max += delta_time * step / (h * 2);
+	if (h_max > h) step = -step;
+	if (h_max < -h) step = -step;
+		
+	figureall(h_max, t_max);	
 }
 
